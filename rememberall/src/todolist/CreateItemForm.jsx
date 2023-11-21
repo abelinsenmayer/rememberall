@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
 import { Button } from "@mui/material"
 import { useState } from "react"
-import ToDoListItem from "./ToDoListItem"
+import { ToDo } from "./ToDoListItem"
 import { Formik } from 'formik'
 
 export default function CreateItemForm({ addItem }) {
@@ -10,7 +10,7 @@ export default function CreateItemForm({ addItem }) {
     const submitHandler = (evt) => {
         if (itemText == "")
             return
-        const item = new ToDoListItem(itemText, false)
+        const item = new ToDo(itemText, false)
         addItem(item)
         setItemText("")
     }
