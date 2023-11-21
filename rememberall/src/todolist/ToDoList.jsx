@@ -13,6 +13,9 @@ export default function ToDoList({ initItems }) {
     const remove = (item) => {
         setItems(items.filter((i) => i != item))
     }
+    const updateText = (item, text) => {
+        setItems(items.map((i) => i == item ? new ToDo(text, item.done) : i))
+    }
 
     return (
         <>
@@ -24,6 +27,7 @@ export default function ToDoList({ initItems }) {
                         todo={item}
                         toggleDone={toggleDone}
                         remove={remove}
+                        updateItem={updateText}
                     />
                 )}
             </ul>
