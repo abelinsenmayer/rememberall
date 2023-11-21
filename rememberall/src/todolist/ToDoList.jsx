@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CreateItemForm from './CreateItemForm'
 import { ToDoListItem, ToDo } from './ToDoListItem'
+import { Button } from '@mui/base'
 
 export default function ToDoList({ initItems }) {
     const [items, setItems] = useState(initItems)
@@ -15,6 +16,9 @@ export default function ToDoList({ initItems }) {
     }
     const updateText = (item, text) => {
         setItems(items.map((i) => i == item ? new ToDo(text, item.done) : i))
+    }
+    const clearCompleted = () => {
+        setItems(items.filter((i) => i.done == false))
     }
 
     return (
@@ -32,6 +36,7 @@ export default function ToDoList({ initItems }) {
                 )}
             </ul>
             <CreateItemForm addItem={addItem} />
+            <Button variant="contained" onClick={clearCompleted}>Clear Complted</Button>
         </>
     )
 }
