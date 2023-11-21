@@ -8,6 +8,7 @@ export default function CreateItemForm({ addItem }) {
     const [itemText, setItemText] = useState("")
 
     const submitHandler = (evt) => {
+        evt.preventDefault()
         if (itemText == "")
             return
         const item = new ToDo(itemText, false)
@@ -16,7 +17,7 @@ export default function CreateItemForm({ addItem }) {
     }
 
     return (
-        <form>
+        <form onSubmit={submitHandler}>
             <TextField
                 id="item-text"
                 label="To do..."

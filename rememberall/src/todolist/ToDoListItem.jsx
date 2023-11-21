@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { Button } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function ToDoListItem({ todo, toggleDone: toggleDone, remove }) {
     const style = todo.done ? { textDecoration: "line-through" } : {}
@@ -9,8 +10,9 @@ function ToDoListItem({ todo, toggleDone: toggleDone, remove }) {
             <Button
                 onClick={() => remove(todo)}
                 variant="outlined"
-                size="small">
-                Delete
+                size="small"
+            >
+                <DeleteIcon />
             </Button>
         </li>
     )
