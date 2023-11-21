@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import CreateItemForm from './CreateItemForm'
-import { ToDoListItem } from './ToDoListItem'
+import { ToDoListItem, ToDo } from './ToDoListItem'
 
 export default function ToDoList({ initItems }) {
     const [items, setItems] = useState(initItems)
     const addItem = (newItem) => {
         setItems((items) => [...items, newItem])
     }
-    const markDone = (item) => {
-        console.log(`marking ${item.text} as done!`)
+    const toggleDone = (item) => {
+        setItems(items.map((i) => i == item ? new ToDo(i.text, !i.done) : i))
     }
     const remove = (item) => {
         setItems(items.filter((i) => i != item))
@@ -22,7 +22,7 @@ export default function ToDoList({ initItems }) {
                     <ToDoListItem
                         key={item.id}
                         todo={item}
-                        markDone={markDone}
+                        toggleDone={toggleDone}
                         remove={remove}
                     />
                 )}

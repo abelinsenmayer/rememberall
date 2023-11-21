@@ -1,9 +1,18 @@
 import { v4 as uuid } from 'uuid'
+import { Button } from '@mui/material'
 
-function ToDoListItem({ todo, markDone, remove }) {
+function ToDoListItem({ todo, toggleDone: toggleDone, remove }) {
+    const style = todo.done ? { textDecoration: "line-through" } : {}
     return (
-        <li onClick={() => remove(todo)}>{todo.text}</li>
-        // TODO markDone
+        <li>
+            <span onClick={() => toggleDone(todo)} style={style}>{todo.text} </span>
+            <Button
+                onClick={() => remove(todo)}
+                variant="outlined"
+                size="small">
+                Delete
+            </Button>
+        </li>
     )
 }
 
