@@ -2,11 +2,14 @@ import { TextField } from "@mui/material"
 import { Button } from "@mui/material"
 import { useState } from "react"
 import ToDoListItem from "./ToDoListItem"
+import { Formik } from 'formik'
 
 export default function CreateItemForm({ addItem }) {
     const [itemText, setItemText] = useState("")
 
     const submitHandler = (evt) => {
+        if (itemText == "")
+            return
         const item = new ToDoListItem(itemText, false)
         addItem(item)
         setItemText("")
