@@ -11,10 +11,14 @@ function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: update
     const updateText = (text) => {
         updateItem(todo, text)
     }
+    const handleDrag = (evt) => {
+        // TODO styling for drag
+        // console.log("Dragging!")
+    }
 
     const style = todo.done ? { textDecoration: "line-through" } : {}
     return (
-        <li className='ToDoListItem'>
+        <li className='ToDoListItem' draggable="true" onDrag={handleDrag}>
             {/* Display the regular view if we are not currenly editing the item */}
             {!isEditing && (
                 <>

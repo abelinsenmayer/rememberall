@@ -5,6 +5,12 @@ import { Button } from '@mui/base'
 
 export default function ToDoList({ initItems }) {
     const [items, setItems] = useState(initItems)
+    const [color, setColor] = useState("black")
+    const style = {
+        color: color
+    }
+
+    // Handlers for modifying list items
     const addItem = (newItem) => {
         setItems((items) => [...items, newItem])
     }
@@ -21,8 +27,26 @@ export default function ToDoList({ initItems }) {
         setItems(items.filter((i) => i.done == false))
     }
 
+    // Handlers for dragging events
+    const handleDragOver = (evt) => {
+        evt.preventDefault()
+        evt.stopPropagation()
+    }
+    const handleDragEnter = (evt) => {
+        evt.preventDefault()
+        evt.stopPropagation()
+        console.log("entering")
+        setColor("red")
+    }
+    const handleDragLeave = (evt) => {
+        evt.preventDefault()
+        evt.stopPropagation()
+        console.log("leaving")
+        setColor("black")
+    }
+
     return (
-        <>
+        <section onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} style={style}>
             <h1>To-Do List</h1>
             <ul>
                 {items.map((item) =>
@@ -37,6 +61,6 @@ export default function ToDoList({ initItems }) {
             </ul>
             <CreateItemForm addItem={addItem} />
             <Button variant="contained" onClick={clearCompleted}>Clear Complted</Button>
-        </>
+        </section>
     )
 }
