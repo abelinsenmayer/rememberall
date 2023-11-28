@@ -24,26 +24,8 @@ export default function ToDoList({ initItems }) {
         setItems(items.filter((i) => i.done == false))
     }
 
-    // Handlers for dragging events
-    const handleDragOver = (evt) => {
-        evt.preventDefault()
-        evt.stopPropagation()
-    }
-    const handleDragEnter = (evt) => {
-        evt.preventDefault()
-        evt.stopPropagation()
-    }
-    const handleDragLeave = (evt) => {
-        evt.preventDefault()
-        evt.stopPropagation()
-    }
-    const handleDrop = (evt) => {
-        evt.dataTransfer.dropEffect = "move"
-        console.log(`set dropEffect to ${evt.dataTransfer.dropEffect}`)
-    }
-
     return (
-        <section onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDrop={handleDrop}>
+        <section>
             <h1>To-Do List</h1>
             <List>
                 {items.map((item) =>

@@ -15,26 +15,9 @@ function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: update
         updateItem(todo, text)
     }
 
-    // Drag event handlers
-    const handleDragStart = (evt) => {
-        evt.dataTransfer.setData("item", todo)
-        // TODO set disabled
-    }
-    const handleDrag = (evt) => {
-        console.log(evt.dataTransfer.getData("item"))
-    }
-    const handleDragEnd = (evt) => {
-        console.log(`dropEffect is ${evt.dataTransfer.dropEffect}`)
-        if (evt.dataTransfer.dropEffect == "move") {
-            remove(todo)
-        } else {
-            // TODO set enabled
-        }
-    }
-
     const style = todo.done ? { textDecoration: "line-through" } : {}
     return (
-        <ListItem className='ToDoListItem' draggable="true" onDrag={handleDrag} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <ListItem className='ToDoListItem' gable="true">
             {/* Display the regular view if we are not currenly editing the item */}
             {!isEditing && (
                 <>
