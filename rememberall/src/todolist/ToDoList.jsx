@@ -38,7 +38,8 @@ export default function ToDoList({ initItems }) {
         evt.stopPropagation()
     }
     const handleDrop = (evt) => {
-        // NOOP
+        evt.dataTransfer.dropEffect = "move"
+        console.log(`set dropEffect to ${evt.dataTransfer.dropEffect}`)
     }
 
     return (
