@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import './ToDoListItem.css'
 import ItemEditForm from './ItemEditForm';
 import { useState } from 'react';
+import { ListItem } from '@mui/material';
 
 function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: updateItem }) {
     const [isEditing, setIsEditing] = useState(false)
@@ -18,7 +19,7 @@ function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: update
 
     const style = todo.done ? { textDecoration: "line-through" } : {}
     return (
-        <li className='ToDoListItem' draggable="true" onDrag={handleDrag}>
+        <ListItem className='ToDoListItem' draggable="true" onDrag={handleDrag}>
             {/* Display the regular view if we are not currenly editing the item */}
             {!isEditing && (
                 <>
@@ -44,7 +45,7 @@ function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: update
             {isEditing && (
                 <ItemEditForm initValue={todo.text} doEdit={updateText} placeholder="To do..." />
             )}
-        </li>
+        </ListItem>
     )
 }
 

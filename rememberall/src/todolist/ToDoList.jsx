@@ -2,13 +2,10 @@ import { useState } from 'react'
 import CreateItemForm from './CreateItemForm'
 import { ToDoListItem, ToDo } from './ToDoListItem'
 import { Button } from '@mui/base'
+import { List } from '@mui/material'
 
 export default function ToDoList({ initItems }) {
     const [items, setItems] = useState(initItems)
-    const [color, setColor] = useState("black")
-    const style = {
-        color: color
-    }
 
     // Handlers for modifying list items
     const addItem = (newItem) => {
@@ -35,20 +32,19 @@ export default function ToDoList({ initItems }) {
     const handleDragEnter = (evt) => {
         evt.preventDefault()
         evt.stopPropagation()
-        console.log("entering")
-        setColor("red")
     }
     const handleDragLeave = (evt) => {
         evt.preventDefault()
         evt.stopPropagation()
-        console.log("leaving")
-        setColor("black")
+    }
+    const handleDrop = (evt) => {
+        // NOOP
     }
 
     return (
-        <section onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} style={style}>
+        <section onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDrop={handleDrop}>
             <h1>To-Do List</h1>
-            <ul>
+            <List>
                 {items.map((item) =>
                     <ToDoListItem
                         key={item.id}
@@ -58,7 +54,8 @@ export default function ToDoList({ initItems }) {
                         updateItem={updateText}
                     />
                 )}
-            </ul>
+            </List>
+            <br />
             <CreateItemForm addItem={addItem} />
             <Button variant="contained" onClick={clearCompleted}>Clear Complted</Button>
         </section>
