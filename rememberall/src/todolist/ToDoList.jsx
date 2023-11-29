@@ -3,6 +3,9 @@ import CreateItemForm from './CreateItemForm'
 import { ToDoListItem, ToDo } from './ToDoListItem'
 import { Button } from '@mui/base'
 import { List } from '@mui/material'
+import { v4 as uuid } from 'uuid'
+import { DragDropContext } from 'react-beautiful-dnd'
+import { StrictModeDroppable } from '../StrictModeDroppable'
 
 export default function ToDoList({ initItems }) {
     const [items, setItems] = useState(initItems)
@@ -23,24 +26,47 @@ export default function ToDoList({ initItems }) {
     const clearCompleted = () => {
         setItems(items.filter((i) => i.done == false))
     }
+    const moveItem = (fromIdx, toIdx) => {
+        const [itemToMove] = items.splice(fromIdx, 1)
+        items.splice(toIdx, 0, itemToMove)
+        setItems(items)
+    }
+
+    // Drag handler
+    const handleDragEnd = (result) => {
+        if (!result.destination) {
+            return
+        }
+        moveItem(result.source.index, result.destination.index)
+    }
 
     return (
-        <section>
+        <>
             <h1>To-Do List</h1>
-            <List>
-                {items.map((item) =>
-                    <ToDoListItem
-                        key={item.id}
-                        todo={item}
-                        toggleDone={toggleDone}
-                        remove={remove}
-                        updateItem={updateText}
-                    />
-                )}
-            </List>
+            <DragDropContext onDragEnd={handleDragEnd}>
+                <StrictModeDroppable type='TO_DO_LIST' droppableId={`to-do-list-${uuid()}`}>
+                    {(provided, snapshot) => (
+                        <div ref={provided.innerRef} {...provided.droppableProps} >
+                            <List>
+                                {items.map((item, index) =>
+                                    <ToDoListItem
+                                        key={item.id}
+                                        todo={item}
+                                        toggleDone={toggleDone}
+                                        remove={remove}
+                                        updateItem={updateText}
+                                        index={index}
+                                    />
+                                )}
+                            </List>
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </StrictModeDroppable>
+            </DragDropContext>
             <br />
             <CreateItemForm addItem={addItem} />
             <Button variant="contained" onClick={clearCompleted}>Clear Complted</Button>
-        </section>
+        </>
     )
 }
