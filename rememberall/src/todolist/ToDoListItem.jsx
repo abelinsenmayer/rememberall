@@ -10,7 +10,6 @@ import { ListItem } from '@mui/material';
 
 function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: updateItem }) {
     const [isEditing, setIsEditing] = useState(false)
-    const [disabled, setDisabled] = useState(false)
     const updateText = (text) => {
         updateItem(todo, text)
     }
