@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import ToDoList from './todolist/ToDoList'
 import { ToDo } from './todolist/ToDoListItem'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,9 +15,9 @@ function App() {
   ]
 
   return (
-    <>
+    <DragDropContext>
       <ToDoList initItems={items} />
-    </>
+    </DragDropContext>
   )
 }
 
