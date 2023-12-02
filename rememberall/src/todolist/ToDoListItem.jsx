@@ -26,8 +26,8 @@ function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
     return (
         <Draggable index={index} draggableId={todo.id}>
             {(provided, snapshot) => (
-                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                    <ListItem className='ToDoListItem' gable="true">
+                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className='ToDoListItem'>
+                    <ListItem gable="true" alignItems='center'>
                         {/* Display the regular view if we are not currenly editing the item */}
                         {!isEditing && (
                             <>
