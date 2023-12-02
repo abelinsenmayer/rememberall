@@ -3,6 +3,11 @@ import { Button } from "@mui/material"
 import { useState } from "react"
 import { ToDo } from "./ToDoListItem"
 
+/**
+ * Form for adding an item to a to-do list.
+ * @callback addItem Adds item to the to-do list.
+ * @returns 
+ */
 export default function CreateItemForm({ addItem }) {
     const [itemText, setItemText] = useState("")
 

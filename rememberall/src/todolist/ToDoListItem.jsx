@@ -8,8 +8,15 @@ import { useState } from 'react';
 import { ListItem } from '@mui/material';
 import { Draggable } from 'react-beautiful-dnd';
 
-
-function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: updateItem, index }) {
+/**
+ * A single to-do item.
+ * @param {ToDo} todo Object which stores the list item's data.
+ * @callback toggleDone Toggle whether the item is marked as "done"
+ * @callback remove Remove the item from a to-do list
+ * @callback updateItem Update the item to another {@link ToDo}
+ * @returns 
+ */
+function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
     const [isEditing, setIsEditing] = useState(false)
     const updateText = (text) => {
         updateItem(todo, text)
@@ -53,7 +60,15 @@ function ToDoListItem({ todo, toggleDone: toggleDone, remove, updateItem: update
     )
 }
 
+/**
+ * The object representation of a to-do list item.
+ */
 class ToDo {
+    /**
+     * Constructor
+     * @param {string} text Display text for the item - a short description.
+     * @param {boolean} done Whether the item is "complete"
+     */
     constructor(text, done) {
         this.text = text
         this.done = done

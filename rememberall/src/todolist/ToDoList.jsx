@@ -7,6 +7,11 @@ import { v4 as uuid } from 'uuid'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { StrictModeDroppable } from '../StrictModeDroppable'
 
+/**
+ * A to-do list. Each item in the list is a {@link ToDo} represented visually by a {@link ToDoListItem}.
+ * @param {ToDo[]} initItems A list of {@link ToDo} objects representing the list's initial contents. 
+ * @returns 
+ */
 export default function ToDoList({ initItems }) {
     const [items, setItems] = useState(initItems)
 
