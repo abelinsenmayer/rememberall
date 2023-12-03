@@ -27,8 +27,8 @@ export default function ToDoList({ initItems, title }) {
     const remove = (item) => {
         setItems(items.filter((i) => i != item))
     }
-    const updateText = (item, text) => {
-        setItems(items.map((i) => i == item ? new ToDo(text, item.done) : i))
+    const setItemAtIndex = (index, item) => {
+        setItems(items.map((i, idx) => idx == index ? item : i))
     }
     const clearCompleted = () => {
         setItems(items.filter((i) => i.done == false))
@@ -61,7 +61,7 @@ export default function ToDoList({ initItems, title }) {
                                         todo={item}
                                         toggleDone={toggleDone}
                                         remove={remove}
-                                        updateItem={updateText}
+                                        updateItem={setItemAtIndex}
                                         index={index}
                                     />
                                 )}

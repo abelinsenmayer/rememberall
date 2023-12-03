@@ -1,15 +1,14 @@
 import { v4 as uuid } from 'uuid'
-import { Button } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import './ToDoListItem.css'
-import ItemEditForm from './ItemEditForm';
+import ListItemEditing from './ListItemEditing';
 import { useState } from 'react';
 import { ListItem } from '@mui/material';
 import { Draggable } from 'react-beautiful-dnd';
+import ListItemCompact from './ListItemCompact';
+import ListItemExpanded from './ListItemExpanded';
 
 /**
- * A single to-do item.
+ * A single to-do item. Changes appearance based on whether it's completed, editing, expanded, etc.
  * @param {ToDo} todo Object which stores the list item's data.
  * @callback toggleDone Toggle whether the item is marked as "done"
  * @callback remove Remove the item from a to-do list
@@ -18,40 +17,42 @@ import { Draggable } from 'react-beautiful-dnd';
  */
 function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
     const [isEditing, setIsEditing] = useState(false)
-    const updateText = (text) => {
-        updateItem(todo, text)
+    const [isExpanded, setIsExpanded] = useState(false)
+    const update = (updatedItem) => {
+        updateItem(index, updatedItem)
     }
 
-    const style = todo.done ? { textDecoration: "line-through" } : {}
     return (
         <Draggable index={index} draggableId={todo.id}>
             {(provided, snapshot) => (
                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className='ToDoListItem'>
                     <ListItem gable="true" alignItems='center'>
-                        {/* Display the regular view if we are not currenly editing the item */}
-                        {!isEditing && (
+                        {!isExpanded && (
                             <>
-                                <span onClick={() => toggleDone(todo)} style={style}>{todo.text} </span>
-                                <Button
-                                    onClick={() => remove(todo)}
-                                    variant="outlined"
-                                    size="small"
-                                >
-                                    <DeleteIcon fontSize='small' />
-                                </Button>
-                                <Button
-                                    onClick={() => setIsEditing(true)}
-                                    variant="outlined"
-                                    size="small"
-                                >
-                                    <EditIcon fontSize='small' />
-                                </Button>
+                                {/* Display the regular view if we are not currenly editing the item */}
+                                {!isEditing && (
+                                    <ListItemCompact
+                                        toggleDone={toggleDone}
+                                        remove={remove}
+                                        todo={todo}
+                                        setEditing={() => setIsEditing(true)}
+                                        setExpanded={() => setIsExpanded(true)}
+                                    />
+                                )}
+
+                                {/* Display edit menu if we are currently editing the item */}
+                                {isEditing && (
+                                    <ListItemEditing
+                                        todo={todo}
+                                        updateItem={update}
+                                        stopEditing={() => setIsEditing(false)}
+                                        placeholder="To do..."
+                                    />
+                                )}
                             </>
                         )}
-
-                        {/* Display edit menu if we are currently editing the item */}
-                        {isEditing && (
-                            <ItemEditForm initValue={todo.text} doEdit={updateText} placeholder="To do..." />
+                        {isExpanded && (
+                            <ListItemExpanded todo={todo} collapse={() => setIsExpanded(false)} updateTodo={update} />
                         )}
                     </ListItem>
                 </div>

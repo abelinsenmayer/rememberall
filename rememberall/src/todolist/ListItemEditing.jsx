@@ -2,20 +2,23 @@ import { Button } from "@mui/base"
 import { useState } from "react"
 import CheckIcon from '@mui/icons-material/Check';
 import { TextField } from "@mui/material";
+import { ToDo } from "./ToDoListItem";
 
 /**
- * Form for editing an existing to-do list item.
- * @callback doEdit Submits a new text value to which the item's description should be updated.
- * @param {string} initValue The initial value for the item's description.
+ * Editing view of an item in a to-do list.
+ * @callback updateItem Sets the {@link ToDo} item to the supplied object.
+ * @param {ToDo} todo The item being edited.
+ * @callback stopEditing Ends editing of the item.
  * @param {string} placeholder Placeholder text which fills the text field if the user has not typed anything.
  * @returns 
  */
-export default function ItemEditForm({ doEdit, initValue, placeholder = "" }) {
-    const [text, setText] = useState(initValue)
+export default function ListItemEditing({ updateItem, todo, stopEditing, placeholder = "" }) {
+    const [text, setText] = useState(todo.text)
 
     const submitHandler = (evt) => {
         evt.preventDefault()
-        doEdit(text)
+        updateItem({ ...todo, text: text })
+        stopEditing()
     }
 
     return (
