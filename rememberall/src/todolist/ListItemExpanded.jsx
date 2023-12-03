@@ -3,9 +3,14 @@ import { Paper } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
+import { useState } from "react";
 
 export default function ListItemExpanded({ todo, collapse, updateItem }) {
-    const handleCollapse = () => {
+    const [text, setText] = useState(todo.text)
+    const [details, setDetails] = useState(todo.details)
+    const collapseAndUpdate = () => {
+        todo.text = text
+        todo.details = details
         updateItem(todo)
         collapse()
     }
@@ -16,9 +21,12 @@ export default function ListItemExpanded({ todo, collapse, updateItem }) {
                 id="text"
                 variant="filled"
                 size="small"
-                value={todo.text}
+                value={text}
                 onChange={(evt) => setText(evt.target.value)}
             />
+
+            {/* TODO details editing field here */}
+
             <Button
                 onClick={() => remove(todo)}
                 size="small"
@@ -26,7 +34,7 @@ export default function ListItemExpanded({ todo, collapse, updateItem }) {
                 <DeleteIcon fontSize='small' />
             </Button>
             <Button
-                onClick={() => handleCollapse}
+                onClick={collapseAndUpdate}
                 size="small"
             >
                 <ExpandMoreIcon fontSize="small" />

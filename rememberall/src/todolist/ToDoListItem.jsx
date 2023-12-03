@@ -49,7 +49,11 @@ function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
                             </>
                         )}
                         {isExpanded && (
-                            <ListItemExpanded todo={todo} collapse={() => setIsExpanded(false)} updateTodo={update} />
+                            <ListItemExpanded
+                                todo={todo}
+                                collapse={() => setIsExpanded(false)}
+                                updateItem={updateItem}
+                            />
                         )}
                     </ListItem>
                 </div>
@@ -67,8 +71,9 @@ class ToDo {
      * @param {string} text Display text for the item - a short description.
      * @param {boolean} done Whether the item is "complete"
      */
-    constructor(text, done) {
+    constructor(text, done, details = "") {
         this.text = text
+        this.details = details
         this.done = done
         this.id = uuid()
     }
