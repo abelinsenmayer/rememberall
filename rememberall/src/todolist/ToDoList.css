@@ -1,3 +1,7 @@
+.ToDoList {
+    padding: 1em;
+}
+
 .ToDoList .list-body {
     border-left: 2px dashed black;
     border-top: 2px solid black;
@@ -5,6 +9,7 @@
 
 .ToDoList h2 {
     text-align: start;
+    margin-top: 0em;
     margin-bottom: 0.2em;
     margin-left: 0.7em;
 }

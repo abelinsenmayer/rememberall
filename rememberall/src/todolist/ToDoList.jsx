@@ -6,7 +6,7 @@ import { List } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { StrictModeDroppable } from '../StrictModeDroppable'
-import { Container } from '@mui/material'
+import { Paper } from '@mui/material'
 import './ToDoList.css'
 
 /**
@@ -48,7 +48,7 @@ export default function ToDoList({ initItems, title }) {
     }
 
     return (
-        <Container className='ToDoList' maxWidth='xs'>
+        <Paper className='ToDoList' square>
             <h2>{title}</h2>
             <DragDropContext onDragEnd={handleDragEnd}>
                 <StrictModeDroppable type='TO_DO_LIST' droppableId={`to-do-list-${uuid()}`}>
@@ -74,7 +74,7 @@ export default function ToDoList({ initItems, title }) {
             <br />
             <CreateItemForm addItem={addItem} />
             <Button variant="contained" onClick={clearCompleted}>Clear Complted</Button>
-        </Container>
+        </Paper>
 
     )
 }
