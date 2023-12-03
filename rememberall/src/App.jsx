@@ -11,7 +11,9 @@ function App() {
   ]
 
   return (
-    <ToDoList initItems={items} />
+    <>
+      <ToDoList initItems={items} title="My First List" />
+    </>
   )
 }
 

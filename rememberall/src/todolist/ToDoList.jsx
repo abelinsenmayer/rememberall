@@ -6,13 +6,15 @@ import { List } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { StrictModeDroppable } from '../StrictModeDroppable'
+import { Container } from '@mui/material'
+import './ToDoList.css'
 
 /**
  * A to-do list. Each item in the list is a {@link ToDo} represented visually by a {@link ToDoListItem}.
  * @param {ToDo[]} initItems A list of {@link ToDo} objects representing the list's initial contents. 
  * @returns 
  */
-export default function ToDoList({ initItems }) {
+export default function ToDoList({ initItems, title }) {
     const [items, setItems] = useState(initItems)
 
     // Handlers for modifying list items
@@ -46,13 +48,13 @@ export default function ToDoList({ initItems }) {
     }
 
     return (
-        <>
-            <h1>To-Do List</h1>
+        <Container className='ToDoList' maxWidth='xs'>
+            <h2>{title}</h2>
             <DragDropContext onDragEnd={handleDragEnd}>
                 <StrictModeDroppable type='TO_DO_LIST' droppableId={`to-do-list-${uuid()}`}>
                     {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.droppableProps} >
-                            <List>
+                            <List className='list-body'>
                                 {items.map((item, index) =>
                                     <ToDoListItem
                                         key={item.id}
@@ -72,6 +74,7 @@ export default function ToDoList({ initItems }) {
             <br />
             <CreateItemForm addItem={addItem} />
             <Button variant="contained" onClick={clearCompleted}>Clear Complted</Button>
-        </>
+        </Container>
+
     )
 }

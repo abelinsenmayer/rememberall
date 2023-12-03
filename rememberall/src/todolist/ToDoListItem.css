@@ -1,3 +1,15 @@
 .ToDoListItem button {
     min-width: 0em;
+    padding: 0.2em;
+    color: black;
+    border: none;
+}
+
+.ToDoListItem button:hover {
+    color: red;
+    border: none;
+}
+
+.ToDoListItem .MuiListItem-root span {
+    width: 100%;
 }
