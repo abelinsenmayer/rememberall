@@ -61,7 +61,7 @@ export default function ToDoList({ initItems, title }) {
                                         todo={item}
                                         toggleDone={toggleDone}
                                         remove={remove}
-                                        updateItem={setItemAtIndex}
+                                        updateItem={(i) => setItemAtIndex(index, i)}
                                         index={index}
                                     />
                                 )}

@@ -18,9 +18,6 @@ import ListItemExpanded from './ListItemExpanded';
 function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
     const [isEditing, setIsEditing] = useState(false)
     const [isExpanded, setIsExpanded] = useState(false)
-    const update = (updatedItem) => {
-        updateItem(index, updatedItem)
-    }
 
     return (
         <Draggable index={index} draggableId={todo.id}>
@@ -44,7 +41,7 @@ function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
                                 {isEditing && (
                                     <ListItemEditing
                                         todo={todo}
-                                        updateItem={update}
+                                        updateItem={updateItem}
                                         stopEditing={() => setIsEditing(false)}
                                         placeholder="To do..."
                                     />
