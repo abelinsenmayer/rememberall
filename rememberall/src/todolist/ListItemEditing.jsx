@@ -12,11 +12,13 @@ import { ToDo } from "./ToDoListItem";
  * @param {string} placeholder Placeholder text which fills the text field if the user has not typed anything.
  * @returns 
  */
-export default function ListItemEditing({ updateItem, todo, stopEditing, placeholder = "" }) {
+export default function ListItemEditing({ updateItem, todo, stopEditing, label = "", }) {
     const [text, setText] = useState(todo.text)
 
     const submitHandler = (evt) => {
         evt.preventDefault()
+        if (text == "")
+            return
         updateItem({ ...todo, text: text })
         stopEditing()
     }
@@ -25,8 +27,8 @@ export default function ListItemEditing({ updateItem, todo, stopEditing, placeho
         <form onSubmit={submitHandler}>
             <TextField
                 id="text"
-                label={placeholder}
-                variant="filled"
+                label={label}
+                variant="outlined"
                 size="small"
                 value={text}
                 onChange={(evt) => setText(evt.target.value)}

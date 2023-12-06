@@ -43,7 +43,7 @@ function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
                                         todo={todo}
                                         updateItem={updateItem}
                                         stopEditing={() => setIsEditing(false)}
-                                        placeholder="To do..."
+                                        label="To do..."
                                     />
                                 )}
                             </>
@@ -53,6 +53,7 @@ function ToDoListItem({ todo, toggleDone, remove, updateItem, index }) {
                                 todo={todo}
                                 collapse={() => setIsExpanded(false)}
                                 updateItem={updateItem}
+                                remove={remove}
                             />
                         )}
                     </ListItem>

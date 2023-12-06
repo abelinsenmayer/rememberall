@@ -1,0 +1,11 @@
+.ListItemExpanded {
+    padding: 0.5em;
+}
+
+.ListItemExpanded .MuiInputBase-root {
+    margin: 0.5em 0;
+}
+
+.ListItemExpanded .header {
+    display: flex;
+}
